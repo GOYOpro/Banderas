@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import com.example.banderas2.ui.theme.Banderas2Theme
 
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

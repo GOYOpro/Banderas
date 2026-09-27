@@ -1,9 +1,12 @@
 package Screens
-import Screens.EspañaConstraint
+import Screens.ColombiaConstraint
 import android.graphics.pdf.content.PdfPageGotoLinkContent
 import android.media.Image
 import android.provider.MediaStore
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.snapping.SnapPosition
+import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,37 +33,41 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.banderas2.R
 import androidx.constraintlayout.compose.Dimension
 import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
+import androidx.compose.ui.layout.layout
 import androidx.constraintlayout.compose.ChainStyle
 
 @Composable
-fun EspañaConstraint(modifier: Modifier = Modifier){
-    ConstraintLayout(modifier = modifier)
-    {
+fun ColombiaConstraint(modifier: Modifier = Modifier){
+    ConstraintLayout(
+        modifier = modifier
+    ) {
         val (FranjaSuperior,FranjaMedia,FranjaInferior) = createRefs()
         val linea1 = createGuidelineFromTop(0.33f)
         val linea2 = createGuidelineFromTop(0.66f)
-        Box(
+        ConstraintLayout(
             modifier = Modifier
-                .background(colorResource(id = R.color.Rojo))
+                .background(colorResource(id = R.color.amarrilo))
                 .constrainAs(FranjaSuperior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    top.linkTo(parent.top)
+                    top.linkTo(linea1)
+                    bottom.linkTo(linea2)
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
         ){}
+
         ConstraintLayout(
-            modifier = modifier
-                .background(colorResource(id = R.color.amarrilo))
+            modifier = Modifier
+                .background(colorResource(id = R.color.azul))
                 .constrainAs(FranjaMedia){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    top.linkTo(FranjaSuperior.bottom)
+                    top.linkTo(linea2)
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
-        ) {}
+        ) { }
 
         ConstraintLayout(
             modifier = modifier
@@ -68,12 +75,12 @@ fun EspañaConstraint(modifier: Modifier = Modifier){
                 .constrainAs(FranjaInferior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    top.linkTo(FranjaMedia.bottom)
+                    top.linkTo(linea2)
+                    bottom.linkTo(parent.bottom)
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
         ) { }
-
         createVerticalChain(FranjaSuperior,FranjaMedia,FranjaInferior, chainStyle = ChainStyle.Packed)
     }
 }
@@ -81,5 +88,5 @@ fun EspañaConstraint(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun Preview(){
-    EspañaConstraint(modifier = Modifier.fillMaxSize())
+    ColombiaConstraint(modifier = Modifier.fillMaxSize())
 }
