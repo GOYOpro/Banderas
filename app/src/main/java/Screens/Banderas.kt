@@ -1,5 +1,6 @@
 package Screens
-import Screens.AlemaniaConstrint
+import Screens.EspañaConstraint
+import android.graphics.pdf.content.PdfPageGotoLinkContent
 import android.media.Image
 import android.provider.MediaStore
 import androidx.compose.foundation.background
@@ -32,58 +33,53 @@ import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.constraintlayout.compose.ChainStyle
 
 @Composable
-fun AlemaniaConstrint(modifier: Modifier = Modifier){
-    ConstraintLayout(
-        modifier = modifier
-    ) {
-        val (Negro,Amarrillo,Rojo) = createRefs()
-        val liena1 = createGuidelineFromTop(0.33f)
+fun EspañaConstraint(modifier: Modifier = Modifier){
+    ConstraintLayout(modifier = modifier)
+    {
+        val (FranjaSuperior,FranjaMedia,FranjaInferior) = createRefs()
+        val linea1 = createGuidelineFromTop(0.33f)
         val linea2 = createGuidelineFromTop(0.66f)
         Box(
             modifier = Modifier
-                .background(Color.Black)
-                .constrainAs(Negro){
+                .background(colorResource(id = R.color.Rojo))
+                .constrainAs(FranjaSuperior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
-                    bottom.linkTo(Amarrillo.top)
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
-        )
-
+        ){}
         ConstraintLayout(
-            modifier = Modifier
+            modifier = modifier
                 .background(colorResource(id = R.color.amarrilo))
-                .constrainAs(Amarrillo){
+                .constrainAs(FranjaMedia){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    top.linkTo(Negro.bottom)
-                    bottom.linkTo(Rojo.top)
+                    top.linkTo(FranjaSuperior.bottom)
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
-        ) {
-        }
+        ) {}
 
         ConstraintLayout(
-            modifier = Modifier
+            modifier = modifier
                 .background(colorResource(id = R.color.Rojo))
-                .constrainAs(Rojo){
+                .constrainAs(FranjaInferior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    top.linkTo(Amarrillo.bottom)
-                    bottom.linkTo(parent.bottom)
+                    top.linkTo(FranjaMedia.bottom)
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
         ) { }
-        createVerticalChain(Negro,Amarrillo,Rojo, chainStyle = ChainStyle.Packed)
+
+        createVerticalChain(FranjaSuperior,FranjaMedia,FranjaInferior, chainStyle = ChainStyle.Packed)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun preview(){
-    AlemaniaConstrint(modifier = Modifier.fillMaxSize())
+fun Preview(){
+    EspañaConstraint(modifier = Modifier.fillMaxSize())
 }

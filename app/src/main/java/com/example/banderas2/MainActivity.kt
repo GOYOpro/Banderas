@@ -1,5 +1,6 @@
 package com.example.banderas2
-import Screens.AlemaniaConstrint
+import Screens.EspañaConstraint
+import Screens.EspañaConstraint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Banderas2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AlemaniaConstrint(modifier = Modifier.padding(innerPadding))
+                    EspañaConstraint(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -50,5 +51,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun preview(){
-    AlemaniaConstrint(modifier = Modifier.fillMaxSize())
+    EspañaConstraint(modifier = Modifier.fillMaxSize())
 }
