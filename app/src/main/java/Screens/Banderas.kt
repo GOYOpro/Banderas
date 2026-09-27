@@ -1,5 +1,5 @@
 package Screens
-import Screens.ColombiaConstraint
+import Screens.ArgentinaConstraint
 import android.graphics.pdf.content.PdfPageGotoLinkContent
 import android.media.Image
 import android.provider.MediaStore
@@ -17,11 +17,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -35,18 +37,18 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.layout.layout
 import androidx.constraintlayout.compose.ChainStyle
-
 @Composable
-fun ColombiaConstraint(modifier: Modifier = Modifier){
+fun ArgentinaConstraint(modifier: Modifier = Modifier){
     ConstraintLayout(
         modifier = modifier
     ) {
         val (FranjaSuperior,FranjaMedia,FranjaInferior) = createRefs()
+        val (sol) = createRefs()
         val linea1 = createGuidelineFromTop(0.33f)
         val linea2 = createGuidelineFromTop(0.66f)
         ConstraintLayout(
             modifier = Modifier
-                .background(colorResource(id = R.color.amarrilo))
+                .background(colorResource(id = R.color.azulCielo))
                 .constrainAs(FranjaSuperior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -59,7 +61,7 @@ fun ColombiaConstraint(modifier: Modifier = Modifier){
 
         ConstraintLayout(
             modifier = Modifier
-                .background(colorResource(id = R.color.azul))
+                .background(Color.White)
                 .constrainAs(FranjaMedia){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -67,11 +69,24 @@ fun ColombiaConstraint(modifier: Modifier = Modifier){
                     height = Dimension.value(80.dp)
                     width = Dimension.fillToConstraints
                 }
-        ) { }
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(70.dp)
+                    .clip(CircleShape)
+                    .background(colorResource(id = R.color.amarrilo))
+                    .constrainAs(sol){
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo( parent.bottom)
+                    }
+            ){}
+        }
 
         ConstraintLayout(
             modifier = modifier
-                .background(colorResource(id = R.color.Rojo))
+                .background(colorResource(id = R.color.azulCielo))
                 .constrainAs(FranjaInferior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -88,5 +103,5 @@ fun ColombiaConstraint(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun Preview(){
-    ColombiaConstraint(modifier = Modifier.fillMaxSize())
+    ArgentinaConstraint(modifier = Modifier.fillMaxSize())
 }
