@@ -10,5 +10,6 @@
     <color name="RojoM">#731515</color>
     <color name="VerdeM">#164D23</color>
     <color name="VerdeMexico">#25B845</color>
-
+    <color name="Verde">#378545</color>
+    <color name="rojo">#922323</color>
 </resources>

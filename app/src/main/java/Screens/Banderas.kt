@@ -1,12 +1,16 @@
 package Screens
 
+import android.media.Image
+import android.provider.MediaStore
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,66 +18,81 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.banderas2.R
-
+import androidx.constraintlayout.compose.Dimension
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 @Composable
-
 /*Composable padre es el bandera screen*/
 //Nombre del parametro,valor
 fun BanderaScreen(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier
-            .padding()
-            .fillMaxSize()
-    ) {
-        Column(
+    ConstraintLayout(modifier = modifier) {
+        val (caja, caja1, caja2) = createRefs()
+
+        val lineguia1 = createGuidelineFromAbsoluteLeft(0.33f)
+        val lineguia2 = createGuidelineFromAbsoluteLeft(0.66f)
+
+        Box(
             modifier = Modifier
-                .fillMaxHeight()
-                .weight(1f)
-                .background(colorResource(id = R.color.VerdeM)),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .background(colorResource(id = R.color.Verde))
+                .constrainAs(caja) {
+                    start.linkTo(parent.start)
+                    end.linkTo(lineguia1)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    height = Dimension.fillToConstraints
+                    width = Dimension.fillToConstraints
+                }
+        )
+
+        ConstraintLayout(
+            modifier = Modifier
+                .background(Color.White)
+                .constrainAs(caja1) {
+                    start.linkTo(lineguia1)
+                    end.linkTo(lineguia2)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    height = Dimension.fillToConstraints
+                    width = Dimension.fillToConstraints
+                }
         ) {
-            Text(
-                text = stringResource(id = R.string.M),
-                color = colorResource(id = R.color.RojoM),
-                fontSize = 100.sp
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+            ){
+                Image(
+                    painterResource(id = R.drawable.simbolo_mexico),
+                    contentDescription = "Imagen central de la bandera"
+                )
+            }
         }
 
-        Column(
+        ConstraintLayout(
             modifier = Modifier
-                .fillMaxHeight()
-                .weight(1f)
-                .background(Color.White),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .weight(1f)
-                .background(colorResource(id = R.color.RojoM)),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(id = R.string.x),
-                color = colorResource(id = R.color.VerdeMexico),
-                fontSize = 100.sp
-            )
-        }
+                .background(colorResource(id = R.color.rojo))
+                .constrainAs(ref = caja2){
+                    start.linkTo(lineguia2)
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    height = Dimension.fillToConstraints
+                    width = Dimension.fillToConstraints
+                }
+        ) { }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun BanderaPreviwe() {
-    BanderaScreen()
+    BanderaScreen(modifier = Modifier.fillMaxSize())
 }
+
