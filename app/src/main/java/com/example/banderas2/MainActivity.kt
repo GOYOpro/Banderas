@@ -37,57 +37,60 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun EstadosUnidos(){
+fun EstadosUnidos() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
             ) {
+                Row(
+                    modifier = Modifier
+                        .weight(7f)
+                        .fillMaxWidth()
+                ) {
 
-                repeat(7){index ->
-                    Row(
+                    Box(
                         modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                    ){
+                            .fillMaxHeight()
+                            .weight(0.4f)
+                            .background(Color.Blue)
+                    )
 
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth(0.4f)
-                                .fillMaxHeight()
-                                .background(Color.Blue)
-                        )
-
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(0.6f)
+                    ) {
+                        repeat(7) { index ->
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxWidth()
+                                    .background(if (index % 2 == 0) Color.Red else Color.White)
+                            )
+                        }
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(6f)
+                        .fillMaxWidth()
+                ) {
+                    repeat(6) { index ->
                         Box(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxWidth()
-                                .background(if (index % 2 == 0)  Color(0xFFB22234) else Color.White )
+                                .background(if ((index + 7) % 2 == 0) Color.Red else Color.White)
                         )
                     }
-                }
-                repeat(6) { index ->
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .background(if ((index + 7) % 2 == 0) Color(0xFFB22234) else Color.White)
-                    )
                 }
             }
         }
