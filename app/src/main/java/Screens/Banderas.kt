@@ -1,5 +1,5 @@
 package Screens
-import Screens.ArgentinaConstraint
+import Screens.JaponConstraint
 import android.graphics.pdf.content.PdfPageGotoLinkContent
 import android.media.Image
 import android.provider.MediaStore
@@ -38,9 +38,10 @@ import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.layout.layout
 import androidx.constraintlayout.compose.ChainStyle
 @Composable
-fun ArgentinaConstraint(modifier: Modifier = Modifier){
+fun JaponConstraint(modifier: Modifier = Modifier){
     ConstraintLayout(
         modifier = modifier
+            .background(Color.Magenta)
     ) {
         val (FranjaSuperior,FranjaMedia,FranjaInferior) = createRefs()
         val (sol) = createRefs()
@@ -48,7 +49,7 @@ fun ArgentinaConstraint(modifier: Modifier = Modifier){
         val linea2 = createGuidelineFromTop(0.66f)
         ConstraintLayout(
             modifier = Modifier
-                .background(colorResource(id = R.color.azulCielo))
+                .background(Color.White)
                 .constrainAs(FranjaSuperior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -74,7 +75,7 @@ fun ArgentinaConstraint(modifier: Modifier = Modifier){
                 modifier = Modifier
                     .size(70.dp)
                     .clip(CircleShape)
-                    .background(colorResource(id = R.color.amarrilo))
+                    .background(colorResource(id = R.color.Rojo))
                     .constrainAs(sol){
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
@@ -86,7 +87,7 @@ fun ArgentinaConstraint(modifier: Modifier = Modifier){
 
         ConstraintLayout(
             modifier = modifier
-                .background(colorResource(id = R.color.azulCielo))
+                .background(Color.White)
                 .constrainAs(FranjaInferior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -103,5 +104,5 @@ fun ArgentinaConstraint(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun Preview(){
-    ArgentinaConstraint(modifier = Modifier.fillMaxSize())
+    JaponConstraint(modifier = Modifier.fillMaxSize())
 }
