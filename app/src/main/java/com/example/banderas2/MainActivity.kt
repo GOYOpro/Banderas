@@ -8,11 +8,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,77 +32,20 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Banderas2Theme {
-                EstadosUnidos()
             }
         }
     }
 }
 
 @Composable
-fun EstadosUnidos() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .weight(7f)
-                        .fillMaxWidth()
-                ) {
+fun Suiza(modifier: Modifier = Modifier) {
 
-                    Box(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .weight(0.4f)
-                            .background(Color.Blue)
-                    )
+}
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .weight(0.6f)
-                    ) {
-                        repeat(7) { index ->
-                            Box(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .fillMaxWidth()
-                                    .background(if (index % 2 == 0) Color.Red else Color.White)
-                            )
-                        }
-                    }
-                }
-                Column(
-                    modifier = Modifier
-                        .weight(6f)
-                        .fillMaxWidth()
-                ) {
-                    repeat(6) { index ->
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
-                                .background(if ((index + 7) % 2 == 0) Color.Red else Color.White)
-                        )
-                    }
-                }
-            }
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        Banderas2Theme {
+            Screen.Preview()
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Banderas2Theme {
-        EstadosUnidos()
-    }
-}
