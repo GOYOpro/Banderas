@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Banderas2Theme {
-                Cuba()
+                Seychelles()
             }
         }
     }
@@ -63,50 +63,60 @@ fun starPath(cx: Float, cy: Float, outerRadius: Float, innerRadius: Float): Path
     return path
 }
 @Composable
-fun Cuba(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxSize()) {
-            repeat(5) { index ->
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                        .background(
-                            if (index % 2 == 0) colorResource(id = R.color.azulfuerte) else Color.White
-                        )
-                )
-            }
+fun Seychelles(modifier: Modifier = Modifier) {
+    val azul = colorResource(id = R.color.azulfuerte)
+    val amarillo = Color(0xFFFFD100)
+    val rojo = Color(0xFFD21034)
+    val blanco = Color.White
+    val verde = Color(0xFF007A3D)
+
+    Canvas(modifier = modifier.fillMaxSize()) {
+        val w = size.width
+        val h = size.height
+        val origin = Offset(0f, h) // Esquina inferior izquierda
+
+        // 1. Franja Azul (Triángulo en el borde superior)
+        val pathAzul = Path().apply {
+            moveTo(origin.x, origin.y)
+            lineTo(0f, 0f)             // Esquina superior izquierda
+            lineTo(w * (1f / 3f), 0f)   // 1/3 del ancho superior
+            close()
         }
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            val triWidth = size.width * 0.38f
+        drawPath(path = pathAzul, color = azul)
 
-            // Construir Triángulo
-            val trianglePath = Path().apply {
-                moveTo(0f, 0f)
-                lineTo(triWidth, size.height / 2f)
-                lineTo(0f, size.height)
-                close()
-            }
-
-            // Dibujar Triángulo Rojo
-            drawPath(
-                path = trianglePath,
-                color = Color(0xFFCB1428)
-            )
-
-            // Centro geométrico para colocar la estrella dentro del triángulo
-            val starCenterX = triWidth * 0.38f
-            val starCenterY = size.height / 2f
-
-            val outerRadius = 24.dp.toPx()
-            val innerRadius = outerRadius * 0.382f
-
-            // Dibujar Estrella Blanca
-            drawPath(
-                path = starPath(starCenterX, starCenterY, outerRadius, innerRadius),
-                color = Color.White
-            )
+        val pathAmarillo = Path().apply {
+            moveTo(origin.x, origin.y)
+            lineTo(w * (1f / 3f), 0f)
+            lineTo(w * (2f / 3f), 0f)   // 2/3 del ancho superior
+            close()
         }
+        drawPath(path = pathAmarillo, color = amarillo)
+
+        // 3. Franja Roja (Polígono que incluye la esquina superior derecha)
+        val pathRojo = Path().apply {
+            moveTo(origin.x, origin.y)
+            lineTo(w * (2f / 3f), 0f)
+            lineTo(w, 0f)               // Esquina superior derecha
+            lineTo(w, h * (1f / 3f))     // 1/3 del alto derecho
+            close()
+        }
+        drawPath(path = pathRojo, color = rojo)
+
+        val pathBlanco = Path().apply {
+            moveTo(origin.x,origin.y)
+            lineTo(w, h * (1f/3f))
+            lineTo(w, h * (2f/3f))
+            close()
+        }
+        drawPath(path = pathBlanco, color = Color.White)
+
+        val pathVerde = Path().apply {
+            moveTo(origin.x, origin.y)
+            lineTo(w, h * (2f / 3f))
+            lineTo(w, h)
+            close()
+        }
+        drawPath(path = pathVerde, color = verde)
     }
 }
 
@@ -114,6 +124,6 @@ fun Cuba(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     Banderas2Theme {
-        Cuba()
+        Seychelles()
     }
 }
