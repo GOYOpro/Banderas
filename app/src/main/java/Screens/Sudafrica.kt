@@ -18,126 +18,116 @@ import kotlin.io.path.moveTo
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.material3.Icon
-import androidx.compose.foundation.background
-import androidx.compose.ui.Alignment
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Icon
+import  androidx.compose.ui.graphics.drawscope.DrawScope
+import kotlin.math.sin
+import  kotlin.math.cos
+import androidx.compose.ui.graphics.drawscope.Stroke
 @Composable
-fun ScreensPapua() {
+fun ScreensButan() {
+    val colorAmarillo = Color(0xFFFFCC00)
+    val colorNaranja = Color(0xFFFF4E00)
+    val colorBlanco = Color.White
+
     Box(
         modifier = Modifier
             .width(360.dp)
             .height(240.dp)
-            .background(Color.Black)
     ) {
-
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val path = Path().apply {
+            val w = size.width
+            val h = size.height
+
+            // 1. Fondo Naranja completo
+            drawRect(color = colorNaranja)
+
+            // 2. Triángulo Amarillo (Mitad superior izquierda)
+            val trianguloAmarillo = Path().apply {
                 moveTo(0f, 0f)
-                lineTo(size.width, 0f)
-                lineTo(size.width, size.height)
+                lineTo(w, 0f)
+                lineTo(0f, h)
                 close()
             }
+            drawPath(path = trianguloAmarillo, color = colorAmarillo)
+
+            // 3. Silueta del Dragón en diagonal (Path con curvas bezier quadraticTo)
+            val dragonPath = Path().apply {
+                // Cabeza en la parte inferior izquierda
+                moveTo(w * 0.38f, h * 0.52f)
+                quadraticTo(w * 0.35f, h * 0.58f, w * 0.30f, h * 0.62f)
+                quadraticTo(w * 0.38f, h * 0.55f, w * 0.42f, h * 0.50f)
+
+                // Ondulaciones del cuerpo
+                quadraticTo(w * 0.48f, h * 0.40f, w * 0.52f, h * 0.48f)
+                quadraticTo(w * 0.58f, h * 0.34f, w * 0.64f, h * 0.42f)
+                quadraticTo(w * 0.72f, h * 0.28f, w * 0.78f, h * 0.36f)
+
+                // Cola
+                quadraticTo(w * 0.82f, h * 0.30f, w * 0.80f, h * 0.38f)
+
+                // Borde inferior trazado de regreso
+                quadraticTo(w * 0.72f, h * 0.34f, w * 0.64f, h * 0.48f)
+                quadraticTo(w * 0.58f, h * 0.40f, w * 0.52f, h * 0.54f)
+                quadraticTo(w * 0.48f, h * 0.46f, w * 0.42f, h * 0.54f)
+                close()
+            }
+
+            // Dibuja el cuerpo blanco del dragón con trazo grueso
             drawPath(
-                path = path,
-                color = Color(0xFFD21034) // Rojo bandera
+                path = dragonPath,
+                color = colorBlanco
             )
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize(0.5f)
-                .align(Alignment.BottomStart),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = "Ave del Paraíso / Estrella Dorada",
-                tint = Color(0xFFFFCC00),
-                modifier = Modifier.size(64.dp)
+            drawPath(
+                path = dragonPath,
+                color = colorBlanco,
+                style = Stroke(width = h * 0.08f)
             )
-        }
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize(0.6f)
-                .align(Alignment.TopEnd)
-                .padding(12.dp)
-        ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Estrella Superior",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+            // 4. Estrellas doradas/amarillas sobre el dragón
+            val posicionesEstrellas = listOf(
+                Offset(w * 0.42f, h * 0.43f),
+                Offset(w * 0.53f, h * 0.46f),
+                Offset(w * 0.65f, h * 0.40f),
+                Offset(w * 0.76f, h * 0.35f)
+            )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Estrella Izquierda",
-                        tint = Color.White,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Estrella Derecha",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Estrella Inferior",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(0.6f),
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Estrella Pequeña",
-                        tint = Color.White,
-                        modifier = Modifier.size(10.dp)
-                    )
-                }
+            for (pos in posicionesEstrellas) {
+                dibujarEstrella(
+                    centro = pos,
+                    radioExterior = h * 0.045f,
+                    radioInterior = h * 0.02f,
+                    color = colorAmarillo
+                )
             }
         }
     }
 }
 
+private fun DrawScope.dibujarEstrella(
+    centro: Offset,
+    radioExterior: Float,
+    radioInterior: Float,
+    color: Color
+) {
+    val path = Path()
+    val anguloPaso = Math.PI / 5
+
+    for (i in 0 until 10) {
+        val r = if (i % 2 == 0) radioExterior else radioInterior
+        val angulo = i * anguloPaso - (Math.PI / 2)
+        val x = centro.x + (r * cos(angulo)).toFloat()
+        val y = centro.y + (r * sin(angulo)).toFloat()
+
+        if (i == 0) {
+            path.moveTo(x, y)
+        } else {
+            path.lineTo(x, y)
+        }
+    }
+    path.close()
+    drawPath(path = path, color = color)
+}
+
 @Preview(showBackground = true)
 @Composable
 fun Preview(){
-    ScreensPapua()
-}
+ScreensButan()}
