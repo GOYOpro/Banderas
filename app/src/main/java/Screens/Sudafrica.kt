@@ -18,113 +18,120 @@ import kotlin.io.path.moveTo
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.tooling.preview.Preview
-
+import androidx.compose.material3.Icon
+import androidx.compose.foundation.background
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
 @Composable
-fun BanderaSudafrica() {
-    val colorAzul = Color(0xFF002395)
-    val colorDorado = Color(0xFFFFB81C)
-    val colorVerde = Color(0xFF007A4D)
-    val colorBlanco = Color.White
-    val colorNegro = Color.Black
-
+fun ScreensPapua() {
     Box(
         modifier = Modifier
             .width(360.dp)
             .height(240.dp)
+            .background(Color.Black)
     ) {
+
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val w = size.width
-            val h = size.height
-
-
-            drawRect(
-                color = colorAzul,
-                topLeft = Offset(0f, 0f),
-                size = Size(w, h / 2f)
-            )
-            drawRect(
-                color = colorDorado,
-                topLeft = Offset(0f, h / 2f),
-                size = Size(w, h / 2f)
-            )
-
-
-            val apex = Offset(w * 0.36f, h / 2f)
-
-            val strokeGrosorBlanco = h * 0.30f
-            val strokeGrosorVerde = h * 0.20f
-
-
-            drawLine(
-                color = colorBlanco,
-                start = Offset(0f, 0f),
-                end = apex,
-                strokeWidth = strokeGrosorBlanco,
-                cap = StrokeCap.Square
-            )
-            drawLine(
-                color = colorBlanco,
-                start = Offset(0f, h),
-                end = apex,
-                strokeWidth = strokeGrosorBlanco,
-                cap = StrokeCap.Square
-            )
-            drawLine(
-                color = colorBlanco,
-                start = apex,
-                end = Offset(w, h * 0.14f),
-                strokeWidth = strokeGrosorBlanco,
-                cap = StrokeCap.Square
-            )
-            drawLine(
-                color = colorBlanco,
-                start = apex,
-                end = Offset(w, h * 0.86f),
-                strokeWidth = strokeGrosorBlanco,
-                cap = StrokeCap.Square
-            )
-
-
-            drawLine(
-                color = colorVerde,
-                start = Offset(0f, 0f),
-                end = apex,
-                strokeWidth = strokeGrosorVerde,
-                cap = StrokeCap.Square
-            )
-            drawLine(
-                color = colorVerde,
-                start = Offset(0f, h),
-                end = apex,
-                strokeWidth = strokeGrosorVerde,
-                cap = StrokeCap.Square
-            )
-            drawLine(
-                color = colorVerde,
-                start = apex,
-                end = Offset(w, h * 0.14f),
-                strokeWidth = strokeGrosorVerde,
-                cap = StrokeCap.Square
-            )
-            drawLine(
-                color = colorVerde,
-                start = apex,
-                end = Offset(w, h * 0.86f),
-                strokeWidth = strokeGrosorVerde,
-                cap = StrokeCap.Square
-            )
-
-
-            val trianguloNegroPath = Path().apply {
+            val path = Path().apply {
                 moveTo(0f, 0f)
-                lineTo(w * 0.28f, h / 2f)
-                lineTo(0f, h)
+                lineTo(size.width, 0f)
+                lineTo(size.width, size.height)
                 close()
             }
             drawPath(
-                path = trianguloNegroPath,
-                color = colorNegro
+                path = path,
+                color = Color(0xFFD21034) // Rojo bandera
             )
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize(0.5f)
+                .align(Alignment.BottomStart),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = "Ave del Paraíso / Estrella Dorada",
+                tint = Color(0xFFFFCC00),
+                modifier = Modifier.size(64.dp)
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize(0.6f)
+                .align(Alignment.TopEnd)
+                .padding(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Estrella Superior",
+                        tint = Color.White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Estrella Izquierda",
+                        tint = Color.White,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Estrella Derecha",
+                        tint = Color.White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Estrella Inferior",
+                        tint = Color.White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Estrella Pequeña",
+                        tint = Color.White,
+                        modifier = Modifier.size(10.dp)
+                    )
+                }
+            }
         }
     }
 }
@@ -132,5 +139,5 @@ fun BanderaSudafrica() {
 @Preview(showBackground = true)
 @Composable
 fun Preview(){
-    BanderaSudafrica()
+    ScreensPapua()
 }
