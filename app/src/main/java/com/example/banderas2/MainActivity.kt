@@ -1,5 +1,4 @@
 package com.example.banderas2
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,7 +39,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Banderas2Theme {
-               ReinoUnido()
             }
         }
     }
@@ -48,91 +46,13 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Composable
-fun ReinoUnido(modifier: Modifier = Modifier) {
-Box(
-    modifier = Modifier
-        .fillMaxSize()
-        .background(colorResource(id = R.color.azulfuerte))
-){
-   Box(
-       Modifier
-           .align(Alignment.Center)
-           .fillMaxWidth(0.2f)
-           .fillMaxHeight(1f)
-           .background(Color.White)
-   ) {
-
-       Box(
-           Modifier
-               .align(Alignment.Center)
-               .fillMaxWidth(1f)
-               .fillMaxHeight(1f)
-               .rotate(30f)
-               .background(Color.White)
-       )
-
-       Box(
-           Modifier
-               .align(Alignment.Center)
-               .fillMaxWidth(0.5f)
-               .fillMaxHeight(1f)
-               .rotate(30f)
-               .background(Color.Red)
-       )
 
 
-       Box(
-           Modifier
-               .align(Alignment.Center)
-               .fillMaxWidth(1f)
-               .fillMaxHeight(1f)
-               .rotate(-30f)
-               .background(Color.White)
-       )
-
-       Box(
-           Modifier
-               .align(Alignment.Center)
-               .fillMaxWidth(0.5f)
-               .fillMaxHeight(1f)
-               .rotate(-30f)
-               .background(Color.Red)
-       )
-   }
-
-    Box(
-        Modifier
-            .align(Alignment.Center)
-            .fillMaxHeight(0.1f)
-            .fillMaxWidth( 1f)
-            .background(Color.White)
-    ){}
-
-
-    Box(
-        modifier = Modifier
-            .align(Alignment.Center)
-            .fillMaxWidth(1f)
-            .fillMaxHeight(0.05f)
-            .background(Color.Red)
-    )
-
-    Box(
-        modifier = Modifier
-            .align(Alignment.Center)
-            .fillMaxHeight(fraction = 1f)
-            .fillMaxWidth(fraction = 0.08f)
-            .background(Color.Red)
-    )
-
-}
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Banderas2Theme {
-        ReinoUnido()
+        Screens.Preview()
     }
 }
