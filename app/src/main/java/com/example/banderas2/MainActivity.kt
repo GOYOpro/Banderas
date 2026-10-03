@@ -47,12 +47,11 @@ class MainActivity : ComponentActivity() {
 
 
 
-
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Banderas2Theme {
+
         Screens.Preview()
     }
 }
