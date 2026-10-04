@@ -1,5 +1,5 @@
 package com.example.banderas2
-import Screens.ScreensSeychelles
+import Screens.ScreensPapua
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -52,6 +52,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     Banderas2Theme {
-        ScreensSeychelles()
+        ScreensPapua()
     }
 }
