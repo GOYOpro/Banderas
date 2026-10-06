@@ -68,7 +68,7 @@ fun PixelArt(matrix: Array<IntArray>){
                 drawRect(
                     color = color,
                     topLeft = Offset(c * cellwidth, r *  cellHeigth),
-                    size = Size(cellwidth , cellwidth)
+                    size = Size(cellwidth , cellHeigth)
                 )
             }
         }
