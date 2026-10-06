@@ -1,5 +1,6 @@
 package com.example.banderas2
 
+import PixelArt
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,6 +24,7 @@ import androidx.compose.ui.modifier.modifierLocalProvider
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.banderas2.ui.theme.Banderas2Theme
+import pixel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,77 +32,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Banderas2Theme {
-                EstadosUnidos()
             }
         }
     }
 }
 
-@Composable
-fun EstadosUnidos() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .weight(7f)
-                        .fillMaxWidth()
-                ) {
 
-                    Box(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .weight(0.4f)
-                            .background(Color.Blue)
-                    )
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .weight(0.6f)
-                    ) {
-                        repeat(7) { index ->
-                            Box(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .fillMaxWidth()
-                                    .background(if (index % 2 == 0) Color.Red else Color.White)
-                            )
-                        }
-                    }
-                }
-                Column(
-                    modifier = Modifier
-                        .weight(6f)
-                        .fillMaxWidth()
-                ) {
-                    repeat(6) { index ->
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
-                                .background(if ((index + 7) % 2 == 0) Color.Red else Color.White)
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Banderas2Theme {
-        EstadosUnidos()
+        PixelArt(matrix = pixel)
     }
 }
