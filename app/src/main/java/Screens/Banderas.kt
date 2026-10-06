@@ -26,12 +26,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.banderas2.R
-import androidx.constraintlayout.compose.Dimension
 import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.ChainStyle
-
 @Composable
 fun EspañaConstraint(modifier: Modifier = Modifier){
     ConstraintLayout(modifier = modifier)
