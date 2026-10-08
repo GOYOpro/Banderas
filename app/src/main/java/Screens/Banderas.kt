@@ -37,18 +37,30 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.layout.layout
 import androidx.constraintlayout.compose.ChainStyle
+import androidx.compose.foundation.shape.GenericShape
+
+val RomboBrasil = GenericShape{size, _ ->
+    moveTo(size.width / 2f, 0f)
+    lineTo(size.width, size.height / 2f)
+    lineTo(size.width / 2f, size.height)
+    lineTo(0f, size.height / 2f)
+    close()
+}
+
+
 @Composable
 fun ArgentinaConstraint(modifier: Modifier = Modifier){
     ConstraintLayout(
         modifier = modifier
     ) {
         val (FranjaSuperior,FranjaMedia,FranjaInferior) = createRefs()
-        val (sol) = createRefs()
+        val (Rombo) = createRefs()
+        val (Sol) = createRefs()
         val linea1 = createGuidelineFromTop(0.33f)
         val linea2 = createGuidelineFromTop(0.66f)
         ConstraintLayout(
             modifier = Modifier
-                .background(colorResource(id = R.color.azulCielo))
+                .background(colorResource(id = R.color.VerdeMexico))
                 .constrainAs(FranjaSuperior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -61,7 +73,7 @@ fun ArgentinaConstraint(modifier: Modifier = Modifier){
 
         ConstraintLayout(
             modifier = Modifier
-                .background(Color.White)
+                .background(colorResource(id = R.color.VerdeMexico))
                 .constrainAs(FranjaMedia){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -72,21 +84,34 @@ fun ArgentinaConstraint(modifier: Modifier = Modifier){
         ) {
             Box(
                 modifier = Modifier
-                    .size(70.dp)
-                    .clip(CircleShape)
+                    .size(180.dp)
+                    .clip(RomboBrasil)
                     .background(colorResource(id = R.color.amarrilo))
-                    .constrainAs(sol){
+                    .constrainAs(Rombo){
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                         top.linkTo(parent.top)
                         bottom.linkTo( parent.bottom)
                     }
             ){}
+
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    .background(colorResource(id = R.color.azul))
+                    .constrainAs(Sol){
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo( parent.bottom)
+                    }
+            )
         }
 
         ConstraintLayout(
             modifier = modifier
-                .background(colorResource(id = R.color.azulCielo))
+                .background(colorResource(id = R.color.VerdeMexico))
                 .constrainAs(FranjaInferior){
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
