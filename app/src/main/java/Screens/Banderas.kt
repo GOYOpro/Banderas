@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.banderas2.R
 import androidx.constraintlayout.compose.Dimension
+import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 @Composable
 fun BanderaScreenFrancia(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier) {
